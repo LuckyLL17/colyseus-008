@@ -87,7 +87,22 @@ export {
 } from './Debug.ts';
 
 // Default rooms
-export { LobbyRoom } from './rooms/LobbyRoom.ts';
+export {
+  LobbyRoom,
+  type FilterInput as LobbyFilterInput,
+  type LobbyOptions,
+  type LobbyMessages,
+  type LobbyRoomEvent,
+  type LobbyRoomEventType,
+  type LobbySnapshotReason,
+  type LobbyEndReason,
+  type LobbySubscribeOptions,
+  type LobbySnapshotMessage,
+  type LobbyEventsMessage,
+  type LobbyEndedMessage,
+  type LobbySubscriptionState,
+  type LobbyClientSubscription,
+} from './rooms/LobbyRoom.ts';
 export { RelayRoom } from './rooms/RelayRoom.ts';
 export { QueueRoom, type QueueOptions, type QueueMatchGroup, type QueueMatchTeam, type QueueClientData } from './rooms/QueueRoom.ts';
 
