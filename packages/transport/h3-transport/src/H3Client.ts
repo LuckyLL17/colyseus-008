@@ -111,6 +111,17 @@ export class H3Client implements Client, ClientPrivate {
   ) {
     this._wtSession = _wtSession;
 
+    Object.defineProperty(this.ref, 'bufferedAmount', {
+      get: () => {
+        try {
+          const desiredSize = this._bidiWriter?.desiredSize ?? 0;
+          return desiredSize < 0 ? -desiredSize : 0;
+        } catch (e) {
+          return 0;
+        }
+      },
+    });
+
     _wtSession.ready.then(() => {
       _wtSession.createBidirectionalStream().then((bidi) => {
         this._bidiReader = bidi.readable.getReader();

@@ -3,6 +3,19 @@ import './legacy.ts';
 export { ColyseusSDK, Client, type JoinOptions, type EndpointSettings, type ClientOptions, type RoomAvailable, type ISeatReservation as SeatReservation } from './Client.ts';
 export { type FetchFn } from './HTTP.ts';
 export { Room, type InputHandle, type InputOptions } from './Room.ts';
+export {
+  LobbySubscription,
+  LobbySubscriptionStatus,
+  type LobbyFilter,
+  type LobbyFilterMetadataValue,
+  type LobbyRoomListing,
+  type LobbySnapshot,
+  type LobbySubscriptionEvent,
+  type LobbySubscriptionEventAction,
+  type LobbySubscriptionOptions,
+  type LobbySubscriptionStatus as LobbySubscriptionState,
+  type LobbySubscriptionStatusMessage,
+} from './LobbySubscription.ts';
 export type { RoomClock, RoomClockLike } from './RoomClock.ts';
 export { type RequestOptions } from './RoomRequest.ts';
 export { Auth, type AuthSettings, type PopupSettings, type AuthResponse, type UserDataResponse, type ForgotPasswordResponse, type AuthData } from "./Auth.ts";

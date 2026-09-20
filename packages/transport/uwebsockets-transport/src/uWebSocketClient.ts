@@ -9,6 +9,14 @@ export class uWebSocketWrapper extends EventEmitter {
     super();
     this.ws = ws;
   }
+
+  get bufferedAmount(): number {
+    try {
+      return this.ws.getBufferedAmount();
+    } catch (e) {
+      return 0;
+    }
+  }
 }
 
 export const ReadyState = {

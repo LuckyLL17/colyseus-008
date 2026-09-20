@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import { logger } from '../Logger.ts';
 import { Room } from './../Room.ts';
-import { updateLobby } from './Lobby.ts';
+import { LOBBY_ACTION, updateLobby } from './Lobby.ts';
 
 import type { IRoomCache, SortOptions, IRoomCacheFilterByKeys, IRoomCacheSortByKeys, ExtractRoomCacheMetadata } from './driver.ts';
 import type { Client } from '../Transport.ts';
@@ -75,18 +75,20 @@ export class RegisteredHandler<
 
   public enableRealtimeListing() {
     this.realtimeListingEnabled = true;
-    this.on('create', (room) => updateLobby(room));
-    this.on('lock', (room) => updateLobby(room));
-    this.on('unlock', (room) => updateLobby(room));
-    this.on('join', (room) => updateLobby(room));
+    this.on('create', (room) => updateLobby(room, false, LOBBY_ACTION.CREATE));
+    this.on('lock', (room) => updateLobby(room, false, LOBBY_ACTION.LOCK));
+    this.on('unlock', (room) => updateLobby(room, false, LOBBY_ACTION.UNLOCK));
+    this.on('join', (room) => updateLobby(room, false, LOBBY_ACTION.UPSERT));
     this.on('leave', (room, _, willDispose) => {
       if (!willDispose) {
-        updateLobby(room);
+        updateLobby(room, false, LOBBY_ACTION.UPSERT);
       }
     });
-    this.on('visibility-change', (room, isVisible) => updateLobby(room, isVisible));
-    this.on('metadata-change', (room) => updateLobby(room));
-    this.on('dispose', (room) => updateLobby(room, true));
+    this.on('visibility-change', (room, isPrivate) => {
+      updateLobby(room, isPrivate ? LOBBY_ACTION.REMOVE : false, LOBBY_ACTION.UPSERT);
+    });
+    this.on('metadata-change', (room) => updateLobby(room, false, LOBBY_ACTION.UPSERT));
+    this.on('dispose', (room) => updateLobby(room, LOBBY_ACTION.DESTROY));
     return this;
   }
 

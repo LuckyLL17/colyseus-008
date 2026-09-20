@@ -48,7 +48,7 @@ export {
 // MatchMaker
 import * as matchMaker from './MatchMaker.ts';
 export { matchMaker };
-export { updateLobby, subscribeLobby } from './matchmaker/Lobby.ts';
+export { updateLobby, subscribeLobby, LOBBY_ACTION, type LobbyAction, type LobbyChange } from './matchmaker/Lobby.ts';
 export { createNodeMatchmakingMiddleware } from './router/node.ts';
 
 // Driver
@@ -87,7 +87,19 @@ export {
 } from './Debug.ts';
 
 // Default rooms
-export { LobbyRoom } from './rooms/LobbyRoom.ts';
+export {
+  LobbyRoom,
+  LOBBY_SUBSCRIPTION_STATUS,
+  type FilterInput,
+  type LobbyFilterMetadataValue,
+  type LobbyOptions,
+  type LobbySubscribeOptions,
+  type LobbySnapshot,
+  type LobbySubscriptionEvent,
+  type LobbySubscriptionEventAction,
+  type LobbySubscriptionStatus,
+  type LobbySubscriptionStatusMessage,
+} from './rooms/LobbyRoom.ts';
 export { RelayRoom } from './rooms/RelayRoom.ts';
 export { QueueRoom, type QueueOptions, type QueueMatchGroup, type QueueMatchTeam, type QueueClientData } from './rooms/QueueRoom.ts';
 
